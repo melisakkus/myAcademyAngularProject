@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Category } from '../../_models/category';
+import { CategoryService } from '../../_services/category.service';
 
 @Component({
   selector: 'app-category',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
   styleUrl: './category.component.css'
 })
 export class CategoryComponent {
-category : string = 'Kategoriler';
-categories : string[] = ['Kategori 1','Kategori 2', 'Kategori 3', 'Kategori 4', 'Kategori 5'
-]}
+categoryList : Category[];
+constructor(private categoryService : CategoryService){
+  this.getAll();
+}
+
+getAll(){
+  this.categoryService.getAll().subscribe({
+    next : values => this.categoryList = values,
+    error : error => console.log(error),
+  })
+}
+}

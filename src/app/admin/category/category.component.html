@@ -1,6 +1,24 @@
+<h3>Kategoriler</h3>
 
-<h3>{{category}}</h3>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Kategori Adı</th>
+      <th>İşlemler</th>
+    </tr>
+  </thead>
 
-<ul>
-  <li *ngFor="let category of categories">{{category}}</li>
-</ul>
+  <tbody>
+    <tr *ngFor="let item of categoryList">
+      <td>{{ item.id }}</td>
+      <td>{{ item.categoryName }}</td>
+      <td>
+        <button class="btn btn-danger">Sil</button>
+        <button class="btn btn-primary">Düzenle</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-outline-primary">Yeni Kategori Ekle</button>
