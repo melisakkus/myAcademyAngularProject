@@ -16,8 +16,8 @@
     <td>{{item.description}}</td>
     <td>{{item.category.categoryName}}</td>
     <td>
-      <button class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i>Sil</button> &nbsp;
-      <button class="btn btn-outline-info"><i class="fa fa-pencil" aria-hidden="true"></i>Güncelle</button>
+      <button class="btn btn-outline-danger" (click)="delete(item.id)" ><i class="fa fa-trash" aria-hidden="true"></i>Sil</button> &nbsp;
+      <button class="btn btn-outline-info" (click)="onSelected(item)" data-bs-toggle="modal" data-bs-target="#editModal" ><i class="fa fa-pencil" aria-hidden="true"></i>Güncelle</button>
     </td>
   </tr>
 </tbody>
@@ -71,6 +71,57 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
         <button type="submit" class="btn btn-primary" >Kaydet</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+<!-- Update Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form #editForm="ngForm" (ngSubmit)="update()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalLabel"> Ürün Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label>Ürün Adı</label>
+            <input type="text" name="productName" [(ngModel)]="editProduct.productName" class="form-control" required="">
+            <div *ngIf="errors?.ProductName">
+              <span class="text-danger" *ngFor="let error of errors.ProductName">{{error}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Görsel Url</label>
+            <input type="text" name="imageUrl" [(ngModel)]="editProduct.imageUrl" class="form-control" required="">
+            <div *ngIf="errors?.ImageUrl">
+              <span class="text-danger" *ngFor="let error of errors.ImageUrl">{{error}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Açıklama</label>
+            <textarea type="text" name="description" [(ngModel)]="editProduct.description" class="form-control" required="" rows="3"> </textarea>
+            <div *ngIf="errors?.Description">
+              <span class="text-danger" *ngFor="let error of errors.Description">{{error}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Kategori</label>
+            <select name="categoryId" [(ngModel)]="editProduct.categoryId" class="form-control">
+                <option selected="editProduct.categoryId" *ngFor="let category of categoryList" value="{{category.id}}">{{category.categoryName}}</option>
+            </select>
+            <div *ngIf="errors?.CategoryId">
+              <span class="text-danger" *ngFor="let error of errors.CategoryId">{{error}}</span>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty" >Güncelle</button>
       </div>
     </div>
   </form>
