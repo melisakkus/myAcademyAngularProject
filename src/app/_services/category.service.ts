@@ -19,7 +19,7 @@ export class CategoryService {
   }
 
   create(model : Category){
-    return this.http.post(this.apiUrl,model);
+    return this.http.post<Category>(this.apiUrl,model);
   }
 
   update(id:number , model : Category){
