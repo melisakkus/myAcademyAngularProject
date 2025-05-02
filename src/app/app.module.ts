@@ -10,6 +10,12 @@ import { ProductComponent } from './admin/product/product.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MainProductComponent } from './_main/main-product/main-product.component';
+import { MainHeroComponent } from './_main/main-hero/main-hero.component';
+import { MainAboutComponent } from './_main/main-about/main-about.component';
+import { MainServiceComponent } from './_main/main-service/main-service.component';
+import { MainClientComponent } from './_main/main-client/main-client.component';
+import { MainHeaderComponent } from './_main/main-header/main-header.component';
+import { MainFooterComponent } from './_main/main-footer/main-footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +24,13 @@ import { MainProductComponent } from './_main/main-product/main-product.componen
     AdminLayoutComponent,
     MainLayoutComponent,
     ProductComponent,
-    MainProductComponent
+    MainProductComponent,
+    MainHeroComponent,
+    MainAboutComponent,
+    MainServiceComponent,
+    MainClientComponent,
+    MainHeaderComponent,
+    MainFooterComponent
   ],
   imports: [
     BrowserModule,

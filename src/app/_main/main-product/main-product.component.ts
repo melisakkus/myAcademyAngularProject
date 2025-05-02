@@ -12,7 +12,6 @@ import { ProductService } from '../../_services/product.service';
     "../../../../assets/vendor/aos/aos.css",
     "../../../../assets/vendor/glightbox/css/glightbox.min.css",
     "../../../../assets/vendor/swiper/swiper-bundle.min.css"
-
 ]
 
 })
