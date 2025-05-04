@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Service } from '../../_models/service';
+import { ServiceService } from '../../_services/service.service';
 
 @Component({
   selector: 'app-main-service',
@@ -15,5 +17,18 @@ import { Component } from '@angular/core';
 
 })
 export class MainServiceComponent {
+  serviceList : Service[];
+
+  constructor(private serviceService : ServiceService) {
+    this.getAllServices();
+  }
+
+  getAllServices(){
+    this.serviceService.getAll().subscribe({
+      next : values => this.serviceList = values,
+      error : err => console.log(err),
+    });
+  }
+
 
 }

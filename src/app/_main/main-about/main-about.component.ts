@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AboutService } from '../../_services/about.service';
+import { About } from '../../_models/about';
 
 @Component({
   selector: 'app-main-about',
@@ -14,5 +16,14 @@ import { Component } from '@angular/core';
 
 })
 export class MainAboutComponent {
+  aboutList : About[];
+  constructor(private aboutService : AboutService) {
+    this.getAllAbouts();
+  }
 
+  getAllAbouts(){
+    this.aboutService.getAll().subscribe({
+      next : values => this.aboutList = values,
+      error : err => console.log(err)  });
+    }
 }

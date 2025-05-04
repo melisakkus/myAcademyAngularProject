@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { BannerService } from '../../_services/banner.service';
+import { Banner } from '../../_models/banner';
 
 @Component({
   selector: 'app-main-hero',
@@ -15,5 +17,16 @@ import { Component } from '@angular/core';
 
 })
 export class MainHeroComponent {
+  bannerList : Banner[];
 
+  constructor(private bannerService : BannerService){
+    this.getAllBanners();
+  }
+
+  getAllBanners(){
+    this.bannerService.getAll().subscribe({
+      next : values => this.bannerList = values,
+      error : err => console.log(err)
+    });
+  }
 }

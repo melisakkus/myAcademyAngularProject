@@ -16,6 +16,7 @@ import { MainServiceComponent } from './_main/main-service/main-service.componen
 import { MainClientComponent } from './_main/main-client/main-client.component';
 import { MainHeaderComponent } from './_main/main-header/main-header.component';
 import { MainFooterComponent } from './_main/main-footer/main-footer.component';
+import { MainFooterSocialmediaComponent } from './_main/main-footer-socialmedia/main-footer-socialmedia.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MainFooterComponent } from './_main/main-footer/main-footer.component';
     MainServiceComponent,
     MainClientComponent,
     MainHeaderComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    MainFooterSocialmediaComponent,
   ],
   imports: [
     BrowserModule,

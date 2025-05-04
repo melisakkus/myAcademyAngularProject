@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SocialMediaService } from '../../_services/social-media.service';
+import { SocialMedia } from '../../_models/socialmedia';
 
 @Component({
   selector: 'app-main-header',
@@ -17,4 +19,17 @@ import { Component } from '@angular/core';
 })
 export class MainHeaderComponent {
 
+  socialMedias : SocialMedia[];
+
+  constructor(private socialMediaService : SocialMediaService)
+  {
+    this.getAllSocialMedias();
+  }
+
+  getAllSocialMedias(){
+    this.socialMediaService.getAll().subscribe({
+      next : values => this.socialMedias = values,
+      error : err => console.log(err)
+    });
+  }
 }
