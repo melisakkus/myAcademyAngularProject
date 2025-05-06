@@ -18,6 +18,10 @@ export class AboutService {
     return this.http.get<About>(this.apiurl + id);
   }
 
+  getLast(){
+    return this.http.get<About>(this.apiurl + 'last');
+  }
+
   create(model : About){
     return this.http.post<About>(this.apiurl, model);
   }

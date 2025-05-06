@@ -13,7 +13,7 @@ export class AboutComponent {
 
   about : About = new About();
   aboutList : About[];
-  editAbout : About;
+  editAbout : any = {};
   errors : any = {};
 
   constructor(private aboutService : AboutService) {
@@ -46,7 +46,53 @@ export class AboutComponent {
     });
   }
 
+  getSelected(model){
+    this.editAbout = model;
+  }
 
+  update(){
+    this.aboutService.update(this.editAbout).subscribe({
+      error: err => {
+        if(err.status === 400) {
+          console.log(err);
+          this.errors = err.error.errors;
+        }
+      },
+      complete : () =>{
+        Swal.fire({
+          icon: 'success',
+          title: 'Güncellendi.',
+          text: 'Hakkımda alanı başarıyla güncellendi!',
+        }).then(()=> location.reload())
+      }
+    })
+  }
+     delete(id : number){
+      console.log("Silinecek ID:", id); // Eklendi
+       Swal.fire({
+         title: "Silmek istediğinize emin misiniz?",
+         text: "Bu işlemi geri alamazsınız!",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#3085d6",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Evet, sil!",
+         cancelButtonText: "Hayır, iptal et!"
+       }).then((result) => {
+         if (result.isConfirmed) {
+           this.aboutService.delete(id).subscribe({
+             error : err => console.log(err),
+             complete : () =>  { Swal.fire({
+               title: "Silindi!",
+               text: "Hakkımda alanı başarıyla silindi.",
+               icon: "success"
+             })
+             this.getAll();
+           }
+           })
+         }
+       });
+     }
 
 
 }

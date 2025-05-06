@@ -18,8 +18,8 @@
     <td>{{about.descriptionFirst ? (about.descriptionFirst.length > 60) ?(about.descriptionFirst | slice:0:60) + '...' : about.descriptionFirst : ''}}</td>
     <td>{{about.descriptionLast ? (about.descriptionLast.length > 60) ?(about.descriptionLast | slice:0:60) + '...' : about.descriptionLast : ''}}</td>
     <td>
-      <button class="btn btn-danger">Sil</button> &nbsp;
-      <button class="btn btn-warning">Güncelle</button>
+      <button class="btn btn-danger" (click)="delete(about.aboutId)"><i class="fa fa-trash" aria-hidden="true"></i> Sil</button> &nbsp;
+      <button class="btn btn-warning" (click)="getSelected(about)" data-bs-toggle="modal" data-bs-target="#editModal" ><i class="fa fa-pencil" aria-hidden="true"> </i> Güncelle</button>
     </td>
   </tr>
 </tbody>
@@ -50,26 +50,41 @@
           <div class="form-group">
             <label>İlk Açıklama</label>
             <textarea name="descriptionFirst" [(ngModel)]="about.descriptionFirst" rows="3" class="form-control"></textarea>
+            <div *ngIf="errors?.DescriptionFirst">
+              <span class="text-danger" *ngFor="let error of errors.DescriptionFirst">{{error}}</span>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Son Açıklama</label>
             <textarea name="descriptionLast" [(ngModel)]="about.descriptionLast" rows="3" class="form-control"></textarea>
+            <div *ngIf="errors?.DescriptionLast">
+              <span class="text-danger" *ngFor="let error of errors.DescriptionLast">{{error}}</span>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Madde 1</label>
             <input type="text" name="item1" [(ngModel)]="about.item1" class="form-control">
+            <div *ngIf="errors?.Item1">
+              <span class="text-danger" *ngFor="let error of errors.Item1">{{error}}</span>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Madde 2</label>
             <input type="text" name="item2" [(ngModel)]="about.item2" class="form-control">
+            <div *ngIf="errors?.Item2">
+              <span class="text-danger" *ngFor="let error of errors.Item2">{{error}}</span>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Madde 3</label>
             <input type="text" name="item3" [(ngModel)]="about.item3" class="form-control">
+            <div *ngIf="errors?.Item3">
+              <span class="text-danger" *ngFor="let error of errors.Item3">{{error}}</span>
+            </div>
           </div>
 
           <div class="form-group">
@@ -89,3 +104,80 @@
   </form>
   </div>
 </div>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <form #editForm="ngForm" (ngSubmit)="update()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Hakkımda Alanı Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label>Başlık</label>
+              <input type="text" name="title" [(ngModel)]="editAbout.title" class="form-control" >
+              <div *ngIf="errors?.Title">
+                <span class="text-danger" *ngFor="let error of errors.Title">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>İlk Açıklama</label>
+              <textarea name="descriptionFirst" [(ngModel)]="editAbout.descriptionFirst" rows="3" class="form-control"></textarea>
+              <div *ngIf="errors?.DescriptionFirst">
+                <span class="text-danger" *ngFor="let error of errors.DescriptionFirst">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Son Açıklama</label>
+              <textarea name="descriptionLast" [(ngModel)]="editAbout.descriptionLast" rows="3" class="form-control"></textarea>
+              <div *ngIf="errors?.DescriptionLast">
+                <span class="text-danger" *ngFor="let error of errors.DescriptionLast">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Madde 1</label>
+              <input type="text" name="item1" [(ngModel)]="editAbout.item1" class="form-control">
+              <div *ngIf="errors?.Item1">
+                <span class="text-danger" *ngFor="let error of errors.Item1">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Madde 2</label>
+              <input type="text" name="item2" [(ngModel)]="editAbout.item2" class="form-control">
+              <div *ngIf="errors?.Item2">
+                <span class="text-danger" *ngFor="let error of errors.Item2">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Madde 3</label>
+              <input type="text" name="item3" [(ngModel)]="editAbout.item3" class="form-control">
+              <div *ngIf="errors?.Item3">
+                <span class="text-danger" *ngFor="let error of errors.Item3">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Resim Link</label>
+              <input type="text" name="imageUrl" [(ngModel)]="editAbout.imageUrl" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Video Link</label>
+              <input type="text" name="videoUrl" [(ngModel)]="editAbout.videoUrl" class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty" >Güncelle</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>

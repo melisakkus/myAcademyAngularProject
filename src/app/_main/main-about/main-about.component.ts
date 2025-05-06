@@ -16,14 +16,15 @@ import { About } from '../../_models/about';
 
 })
 export class MainAboutComponent {
-  aboutList : About[];
+  // aboutList : About[];
+  about : About = new About();
   constructor(private aboutService : AboutService) {
     this.getAllAbouts();
   }
 
   getAllAbouts(){
-    this.aboutService.getAll().subscribe({
-      next : values => this.aboutList = values,
+    this.aboutService.getLast().subscribe({
+      next : value => this.about = value,
       error : err => console.log(err)  });
     }
 }

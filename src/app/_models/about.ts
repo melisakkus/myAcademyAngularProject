@@ -1,6 +1,6 @@
 
 export class About {
-aboutid;
+aboutId;
 title;
 descriptionFirst;
 descriptionLast;
