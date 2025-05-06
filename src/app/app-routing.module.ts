@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ProductComponent } from './admin/product/product.component';
+import { AboutComponent } from './admin/about/about.component';
 
 const routes: Routes = [
 
@@ -21,6 +22,9 @@ const routes: Routes = [
       },
       {
         path : 'product' , component : ProductComponent
+      },
+      {
+        path : 'about' , component : AboutComponent
       },
     ]
   }

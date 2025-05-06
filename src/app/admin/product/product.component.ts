@@ -15,7 +15,7 @@ export class ProductComponent {
   productList : Product[];
   product : Product = new Product();
   editProduct : any = {};
-  errors : any = {};
+  errors: any = {};
   categoryList : Category[];
 
   constructor(private productService : ProductService, private categoryService : CategoryService)
@@ -40,20 +40,18 @@ export class ProductComponent {
 
   create(){
     this.productService.create(this.product).subscribe({
-      next : value => this.productList.push(value),
-      error : err =>{
-        if(err.status === 400){
-          console.log(err);
+      next: value => this.productList.push(value),
+      error: err => {
+        if(err.status===400){
+          console.log(err)
           this.errors = err.error.errors;
         }
       },
-      complete : () => {
-         Swal.fire({
-              title: "Eklendi!",
-              text: "Kategori başarıyla oluşturuldu.",
-              icon: "success"
-            }).then(()=> location.reload())
-      }
+      complete: () => Swal.fire({
+            title: "Eklendi!",
+            text: "Ürün başarıyla eklendi.",
+            icon: "success"
+          }).then(()=> location.reload())
     })
   }
 

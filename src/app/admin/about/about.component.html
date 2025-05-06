@@ -1,0 +1,91 @@
+ <p>Hakkımda Alanı</p>
+
+ <table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Görsel</th>
+      <th>Başlık</th>
+      <th>Açıklama - 1</th>
+      <th>Açıklama - 2</th>
+      <th>İşlemler</th>
+    </tr>
+  </thead>
+
+<tbody>
+  <tr *ngFor="let about of aboutList">
+    <td> <img src="{{about.imageUrl}}" alt="Ürün Görseli" style="width: 75px;height: 75px"></td>
+    <td>{{about.title}}</td>
+    <td>{{about.descriptionFirst ? (about.descriptionFirst.length > 60) ?(about.descriptionFirst | slice:0:60) + '...' : about.descriptionFirst : ''}}</td>
+    <td>{{about.descriptionLast ? (about.descriptionLast.length > 60) ?(about.descriptionLast | slice:0:60) + '...' : about.descriptionLast : ''}}</td>
+    <td>
+      <button class="btn btn-danger">Sil</button> &nbsp;
+      <button class="btn btn-warning">Güncelle</button>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<div class="text-center mb-3">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa fa-plus" aria-hidden="true"> </i> Yeni Hakkımda Alanı Ekle</button>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <form #createForm="ngForm" (ngSubmit)="create()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel">Yeni Hakkımda Alanı Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label>Başlık</label>
+            <input type="text" name="title" [(ngModel)]="about.title" class="form-control" >
+            <div *ngIf="errors?.Title">
+              <span class="text-danger" *ngFor="let error of errors.Title">{{error}}</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>İlk Açıklama</label>
+            <textarea name="descriptionFirst" [(ngModel)]="about.descriptionFirst" rows="3" class="form-control"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Son Açıklama</label>
+            <textarea name="descriptionLast" [(ngModel)]="about.descriptionLast" rows="3" class="form-control"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Madde 1</label>
+            <input type="text" name="item1" [(ngModel)]="about.item1" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Madde 2</label>
+            <input type="text" name="item2" [(ngModel)]="about.item2" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Madde 3</label>
+            <input type="text" name="item3" [(ngModel)]="about.item3" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label>Resim Link</label>
+            <input type="text" name="imageUrl" [(ngModel)]="about.imageUrl" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Video Link</label>
+            <input type="text" name="videoUrl" [(ngModel)]="about.videoUrl" class="form-control">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

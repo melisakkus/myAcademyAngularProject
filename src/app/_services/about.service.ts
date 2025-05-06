@@ -19,7 +19,7 @@ export class AboutService {
   }
 
   create(model : About){
-    return this.http.post(this.apiurl, model);
+    return this.http.post<About>(this.apiurl, model);
   }
 
   update(model : About){

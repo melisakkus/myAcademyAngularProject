@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SocialMediaService } from '../../_services/social-media.service';
+import { SocialMedia } from '../../_models/socialmedia';
 
 @Component({
   selector: 'app-main-footer-socialmedia',
@@ -16,5 +18,17 @@ import { Component } from '@angular/core';
 
 })
 export class MainFooterSocialmediaComponent {
+
+  socialList : SocialMedia[];
+  constructor(private socialMediuaService : SocialMediaService) {
+    this.getSocialMedia();
+   }
+
+  getSocialMedia(){
+    return this.socialMediuaService.getAll().subscribe({
+      next : values => this.socialList = values,
+      error : err => console.log(err),
+    });
+  }
 
 }
