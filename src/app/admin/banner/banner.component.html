@@ -1,0 +1,114 @@
+<div class="text-center mt-3">
+  <h4>Öne Çıkan Alan Düzenleme Sayfası</h4>
+</div>
+<br>
+<table class="table table-bordered table-hover">
+  <thead>
+     <tr>
+      <th>Resim</th>
+      <th>Başlık</th>
+      <th>İçerik</th>
+      <th>İşlemler</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let banner of bannerList">
+      <td><img src="{{banner.imageUrl}}" style="width: 75px;height: 75px"></td>
+      <td>{{banner.title}}</td>
+      <td>{{banner.description}}</td>
+      <td>
+        <button class="btn btn-danger" (click)="delete(banner.bannerId)"><i class="fa fa-trash" aria-hidden="true"></i> Sil</button> &nbsp;
+        <button class="btn btn-warning" (click)="onSelected(banner)"  data-bs-toggle="modal" data-bs-target="#editModal" ><i class="fa fa-pencil" aria-hidden="true"> </i> Güncelle</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div class="text-center mt-3">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" ><i class="fa fa-plus" aria-hidden="true"> </i> Yeni Öne Çıkan Alan Ekle</button>
+</div>
+
+<!--CreateModal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form #createForm="ngForm" (ngSubmit)="create()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Yeni Öne Çıkan Alan Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Başlık</label>
+            <input type="text" name="title" [(ngModel)]="banner.title" class="form-control" >
+            <div *ngIf="errors?.Title">
+              <span class="text-danger" *ngFor="let error of errors.Title">{{error}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>İçerik</label>
+            <textarea name="description" [(ngModel)]="banner.description" rows="3" class="form-control"></textarea>
+            <div *ngIf="errors?.Description">
+              <span class="text-danger" *ngFor="let error of errors.Description">{{error}}</span>
+            </div>
+          </div>
+          <div>
+            <label>Resim Link</label>
+            <input type="text" name="imageUrl" [(ngModel)]="banner.imageUrl" class="form-control" >
+            <div *ngIf="errors?.ImageUrl">
+              <span class="text-danger" *ngFor="let error of errors.ImageUrl">{{error}}</span>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
+      </div>
+    </div>
+
+    </form>
+    </div>
+  </div>
+</div>
+
+<!--UpdateModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form #updateForm="ngForm" (ngSubmit)="update()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Öne Çıkan Alan Güncelle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Başlık</label>
+            <input type="text" name="title" [(ngModel)]="editBanner.title" class="form-control" >
+            <div *ngIf="errors?.Title">
+              <span class="text-danger" *ngFor="let error of errors.Title">{{error}}</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>İçerik</label>
+            <textarea name="description" [(ngModel)]="editBanner.description" rows="3" class="form-control"></textarea>
+            <div *ngIf="errors?.Description">
+              <span class="text-danger" *ngFor="let error of errors.Description">{{error}}</span>
+            </div>
+          </div>
+          <div>
+            <label>Resim Link</label>
+            <input type="text" name="imageUrl" [(ngModel)]="editBanner.imageUrl" class="form-control" >
+            <div *ngIf="errors?.ImageUrl">
+              <span class="text-danger" *ngFor="let error of errors.ImageUrl">{{error}}</span>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!updateForm.dirty" >Güncelle</button>
+      </div>
+    </div>
+
+    </form>
+    </div>
+  </div>
+</div>

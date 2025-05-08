@@ -18,6 +18,11 @@ import { MainHeaderComponent } from './_main/main-header/main-header.component';
 import { MainFooterComponent } from './_main/main-footer/main-footer.component';
 import { MainFooterSocialmediaComponent } from './_main/main-footer-socialmedia/main-footer-socialmedia.component';
 import { AboutComponent } from './admin/about/about.component';
+import { BannerComponent } from './admin/banner/banner.component';
+import { BrandComponent } from './admin/brand/brand.component';
+import { ServiceComponent } from './admin/service/service.component';
+import { SocialMediaComponent } from './admin/social-media/social-media.component';
+import { SubscribeUserComponent } from './admin/subscribe-user/subscribe-user.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,11 @@ import { AboutComponent } from './admin/about/about.component';
     MainFooterComponent,
     MainFooterSocialmediaComponent,
     AboutComponent,
+    BannerComponent,
+    BrandComponent,
+    ServiceComponent,
+    SocialMediaComponent,
+    SubscribeUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
-<h3>Kategoriler</h3>
-
+<div class="text-center mt-3">
+  <h4>Kategori Düzenleme Sayfası</h4>
+</div>
+<br>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -28,21 +30,24 @@
 <!-- Create Modal -->
   <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <form #createForm="ngForm" (ngSubmit)="create();createForm.resetForm()">
+    <form #createForm="ngForm" (ngSubmit)="create()">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="createModalLabel">Yeni Kategori Ekle</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  (click)="clearErrors()" ></button>
       </div>
       <div class="modal-body">
           <div class="form-group">
             <label>Kategori Adı</label>
-            <input type="text" name="categoryName" [(ngModel)]="category.categoryName" class="form-control" required="">
+            <input type="text" name="categoryName" [(ngModel)]="category.categoryName" class="form-control">
+            <div *ngIf="errors?.CategoryName">
+              <span class="text-danger" *ngFor="let error of errors.CategoryName">{{error}}</span>
+            </div>
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="createForm.invalid" >Kaydet</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
       </div>
     </div>
   </form>
@@ -57,17 +62,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="editModalLabel">Kategori Güncelle</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
       </div>
       <div class="modal-body">
           <div class="form-group">
             <label>Kategori Adı</label>
-            <input type="text" name="categoryName" [(ngModel)]="editCategory.categoryName" class="form-control" required="">
+            <input type="text" name="categoryName" [(ngModel)]="editCategory.categoryName" class="form-control">
+            <div *ngIf="errors?.CategoryName">
+              <span class="text-danger" *ngFor="let error of errors.CategoryName">{{error}}</span>
+            </div>
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="editForm.invalid || !editForm.dirty" >Güncelle</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty" >Güncelle</button>
       </div>
     </div>
   </form>

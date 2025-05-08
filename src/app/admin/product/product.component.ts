@@ -56,7 +56,7 @@ export class ProductComponent {
   }
 
   onSelected(model){
-      this.editProduct = model;
+    this.editProduct = {...model};
   }
 
   update(){
@@ -103,4 +103,9 @@ export class ProductComponent {
        }
      });
    }
+
+   clearErrors() {
+    this.errors = {};
+  }
+
 }

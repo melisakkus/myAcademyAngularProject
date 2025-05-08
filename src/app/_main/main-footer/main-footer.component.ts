@@ -33,7 +33,8 @@ export class MainFooterComponent {
                 title: "Kaydedildi!",
                 text: `${this.newUser.email} için abonelik talebiniz alındı. Teşekkür ederiz!`,
                 icon: "success"
-              })
+              });
+              this.newUser.email = '';
             }
       });
     }

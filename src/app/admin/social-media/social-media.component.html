@@ -1,0 +1,121 @@
+<div class="text-center mt-3">
+  <h4>Sosyal Medyalar</h4>
+</div>
+<br>
+ <table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>İsim</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let social of socialList; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{social.name}}</td>
+      <td>
+        <button *ngIf="social.icon" class="btn btn-primary">Var</button>
+        <button *ngIf="!social.icon" class="btn btn-secondary">Yok</button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="delete(social.socialMediaId)"><i class="fa fa-trash" aria-hidden="true"></i> Sil</button> &nbsp;
+        <button class="btn btn-warning" (click)="getSelected(social)" data-bs-toggle="modal" data-bs-target="#editModal" ><i class="fa fa-pencil" aria-hidden="true"> </i> Güncelle</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div class="text-center mb-3">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa fa-plus" aria-hidden="true"> </i> Yeni Sosyal Medya Ekle</button>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <form #createForm="ngForm" (ngSubmit)="create()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel">Yeni Sosyal Medya Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label>İsim</label>
+            <input type="text" name="name" [(ngModel)]="social.name" class="form-control" >
+            <div *ngIf="errors?.Name">
+              <span class="text-danger" *ngFor="let error of errors.Name">{{error}}</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Link</label>
+            <textarea name="url" [(ngModel)]="social.url" rows="3" class="form-control"></textarea>
+            <div *ngIf="errors?.Url">
+              <span class="text-danger" *ngFor="let error of errors.Url">{{error}}</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Ikon</label>
+            <input type="text" name="icon" [(ngModel)]="social.icon" class="form-control" >
+            <div *ngIf="errors?.Icon">
+              <span class="text-danger" *ngFor="let error of errors.Icon">{{error}}</span>
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <form #editForm="ngForm" (ngSubmit)="update()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Sosyal Medya Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label>İsim</label>
+              <input type="text" name="name" [(ngModel)]="editSocial.name" class="form-control" >
+              <div *ngIf="errors?.Name">
+                <span class="text-danger" *ngFor="let error of errors.Name">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Link</label>
+              <textarea name="url" [(ngModel)]="editSocial.url" rows="3" class="form-control"></textarea>
+              <div *ngIf="errors?.Url">
+                <span class="text-danger" *ngFor="let error of errors.Url">{{error}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Ikon</label>
+              <input type="text" name="icon" [(ngModel)]="editSocial.icon" class="form-control" >
+              <div *ngIf="errors?.Icon">
+                <span class="text-danger" *ngFor="let error of errors.Icon">{{error}}</span>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty" >Güncelle</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>

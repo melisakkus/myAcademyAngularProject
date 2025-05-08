@@ -47,7 +47,7 @@ export class AboutComponent {
   }
 
   getSelected(model){
-    this.editAbout = model;
+    this.editAbout = {...model};
   }
 
   update(){
@@ -68,7 +68,6 @@ export class AboutComponent {
     })
   }
      delete(id : number){
-      console.log("Silinecek ID:", id); // Eklendi
        Swal.fire({
          title: "Silmek istediğinize emin misiniz?",
          text: "Bu işlemi geri alamazsınız!",
@@ -94,5 +93,8 @@ export class AboutComponent {
        });
      }
 
+     clearErrors() {
+      this.errors = {};
+    }
 
 }

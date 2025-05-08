@@ -1,0 +1,83 @@
+<div class="text-center mt-3">
+  <h4>Bültene Abone Olan Kullanıcılar</h4>
+</div>
+<br>
+ <table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let user of userList; let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <button class="btn btn-danger" (click)="delete(user.subscribeUserId)"><i class="fa fa-trash" aria-hidden="true"></i> Sil</button> &nbsp;
+        <button class="btn btn-warning" (click)="getSelected(user)" data-bs-toggle="modal" data-bs-target="#editModal" ><i class="fa fa-pencil" aria-hidden="true"> </i> Güncelle</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div class="text-center mb-3">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa fa-plus" aria-hidden="true"> </i> Yeni Kullanıcı Ekle</button>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <form #createForm="ngForm" (ngSubmit)="create()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel">Yeni Kullanıcı Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" [(ngModel)]="user.email" class="form-control" >
+            <div *ngIf="errors?.Email">
+              <span class="text-danger" *ngFor="let error of errors.Email">{{error}}</span>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <form #editForm="ngForm" (ngSubmit)="update()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Kullanıcı  Bilgisi Güncelle</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" name="email" [(ngModel)]="editUser.email" class="form-control" >
+              <div *ngIf="errors?.Email">
+                <span class="text-danger" *ngFor="let error of errors.Email">{{error}}</span>
+              </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty" >Güncelle</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>

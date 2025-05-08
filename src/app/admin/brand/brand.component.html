@@ -1,0 +1,87 @@
+<div class="text-center mt-3">
+  <h4>Marka Bilgileri Düzenleme Sayfası</h4>
+</div>
+<br>
+<div class="text-center">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Resim</th>
+          <th>İşlemler</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brandList; let i = index">
+          <td>{{i + 1}}</td>
+          <td><img src="{{brand.imageUrl}}" style="width: 75px;height: 75px"></td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="delete(brand.brandId)"><i class="fa fa-trash" aria-hidden="true"></i> Sil</button> &nbsp;
+            <button class="btn btn-warning btn-sm" (click)="onSelected(brand)" data-bs-toggle="modal" data-bs-target="#editModal" ><i class="fa fa-pencil" aria-hidden="true"> </i> Güncelle</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<div class="text-center mt-3">
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" ><i class="fa fa-plus" aria-hidden="true"> </i> Yeni Marka Ekle</button>
+</div>
+
+<!--CreateModal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form #createForm="ngForm" (ngSubmit)="create()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Yeni Marka Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  (click)="clearErrors()" ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Resim Url</label>
+            <input type="text" name="title" [(ngModel)]="brand.imageUrl" class="form-control" >
+            <div *ngIf="errors?.ImageUrl">
+              <span class="text-danger" *ngFor="let error of errors.ImageUrl">{{error}}</span>
+            </div>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
+      </div>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!--UpdateModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form #updateForm="ngForm" (ngSubmit)="update()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Marka Bilgisi Güncelle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  (click)="clearErrors()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Resim Url</label>
+            <input type="text" name="title" [(ngModel)]="editBrand.imageUrl" class="form-control" >
+            <div *ngIf="errors?.ImageUrl">
+              <span class="text-danger" *ngFor="let error of errors.ImageUrl">{{error}}</span>
+            </div>
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  (click)="clearErrors()">İptal</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!updateForm.dirty" >Güncelle</button>
+      </div>
+    </div>
+
+    </form>
+    </div>
+  </div>
+</div>

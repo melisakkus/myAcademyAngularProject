@@ -15,6 +15,7 @@ export class CategoryComponent {
 categoryList : Category[];
 category : Category = new Category();
 editCategory : any = {} ;
+errors : any = {};
 
 constructor(private categoryService : CategoryService){
   this.getAll();
@@ -27,36 +28,57 @@ getAll(){
   })
 }
 
-create(){
-this.categoryService.create(this.category).subscribe({
-  next : value => this.categoryList.push(value), // yeni category değerini listeye pushladık
-  error : err => console.log(err),
-  complete : () => {
-    Swal.fire({
-      title: "Eklendi!",
-      text: "Kategori başarıyla oluşturuldu.",
-      icon: "success"
-    })
-    this.getAll();
-  }
-})
+clearErrors() {
+  this.errors = {};
 }
+create(){
+    Swal.fire({
+      title: 'Kaydetmek istediğinize emin misiniz?',
+      icon : 'question',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Evet!",
+      cancelButtonText: "Hayır, iptal et!"
+    }).then((result)=> {
+    if(result.isConfirmed) {
+        this.categoryService.create(this.category).subscribe({
+          next : value => this.category = value,
+          error : err => {
+            if(err.status === 400) {
+              console.log(err.error.errors);
+              console.log(err);
+              this.errors = err.error.errors;
+            }
+          },
+          complete : () => Swal.fire({
+            title: "Eklendi!",
+            text: "Yeni marka başarıyla eklendi.",
+            icon: "success"
+          }).then(()=> location.reload())
+        })
+      }
+    })
+  }
 
 onSelected(model : Category){
-  this.editCategory = model; // seçilen category değerini editCategory değişkenine atadık
+  this.editCategory = {...model};
+  // seçilen category değerini editCategory değişkenine atadık
 }
 
 update(){
   this.categoryService.update(this.editCategory.id, this.editCategory).subscribe({
-    error : err => console.log(err),
+    error : err => {
+      if(err.status === 400) {
+        console.log(err);
+        this.errors = err.error.errors;
+      }
+    },
     complete : () => {
       Swal.fire({
         title: "Güncellendi!",
         text: "Kategori başarıyla güncellendi.",
         icon: "success"
-      })
-      this.getAll();
-    }
+      }) .then(()=> location.reload())}
   })
 }
 

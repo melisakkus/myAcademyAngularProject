@@ -1,8 +1,12 @@
-<p>ürünler</p>
+<div class="text-center mt-3">
+  <h4>Ürün Düzenleme Sayfası</h4>
+</div>
+<br>
 <table class="table table-bordered table-hover">
 <thead>
   <tr>
     <th>#</th>
+    <th>Görsel</th>
     <th>Ürün Adı</th>
     <th>Açıklama</th>
     <th>Kategori</th>
@@ -12,8 +16,11 @@
 <tbody>
   <tr *ngFor="let item of productList; let i = index">
     <th>{{i+1}}</th>
-    <td> <img src="{{item.imageUrl}}" alt="Ürün Görseli" style="width: 75px;height: 75px">  {{item.productName}}</td>
-    <td>{{item.description}}</td>
+    <td> <img src="{{item.imageUrl}}" alt="Ürün Görseli" style="width: 75px;height: 75px"></td>
+    <td>{{item.productName}}</td>
+    <td>
+      {{ item.description.length > 75 ? item.description.substring(0, 75) + '...' : item.description }}
+    </td>
     <td>{{item.category.categoryName}}</td>
     <td>
       <button class="btn btn-outline-danger" (click)="delete(item.id)" ><i class="fa fa-trash" aria-hidden="true"></i>Sil</button> &nbsp;
@@ -34,7 +41,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="createModalLabel">Yeni Ürün Ekle</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
       </div>
       <div class="modal-body">
 
@@ -73,7 +80,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
         <button type="submit" class="btn btn-primary" >Kaydet</button>
       </div>
     </div>
@@ -88,7 +95,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="editModalLabel"> Ürün Güncelle</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="clearErrors()"></button>
       </div>
       <div class="modal-body">
           <div class="form-group">
@@ -123,7 +130,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="clearErrors()">İptal</button>
         <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty" >Güncelle</button>
       </div>
     </div>
