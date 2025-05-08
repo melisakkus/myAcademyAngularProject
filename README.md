@@ -1,59 +1,24 @@
-# MyAcademyAngularProject
+# .NET Core & Angular ile Web Uygulaması: Angular_Company
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Angular ön yüzü ve .NET Core arka ucu ile geliştirilmiş bu proje, kullanıcı etkileşimleri için Angular'da iki modül (main, admin) sunarken, .NET Core API katmanıyla veri alışverişini yönetir ve Entity Framework Core ile veritabanı işlemlerini gerçekleştirir.
 
-## Development server
+Uygulamanın ön yüzünde, Angular framework'ü ile geliştirilmiş kullanıcı dostu bir arayüz bulunmaktadır. Proje, temel kullanıcı etkileşimlerini barındıran main modülü ve kapsamlı yönetim işlevlerini sunan admin modülü olmak üzere iki ana bölümden oluşmaktadır. Tekrar eden arayüz bileşenleri, projenin genelinde tutarlılığı sağlamak ve yönetimi kolaylaştırmak amacıyla layout klasöründe merkezi olarak düzenlenmiştir.
 
-To start a local development server, run:
+Backend tarafı için : https://github.com/melisakkus/Angular_CompanyServer
 
-```bash
-ng serve
-```
+## 🚀 Proje Görselleri
+![Ekran görüntüsü 2025-05-08 175222](https://github.com/user-attachments/assets/7ad7c943-0ecf-4e53-9590-f7ce2be0e053)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+![Ekran görüntüsü 2025-05-08 175229](https://github.com/user-attachments/assets/5ff978bc-9c4a-492e-bedd-3cf2af7923a6)
 
-## Code scaffolding
+![Ekran görüntüsü 2025-05-08 175238](https://github.com/user-attachments/assets/4b1d60db-b900-4c86-935a-2b9cf6f2bde5)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+![Ekran görüntüsü 2025-05-08 175248](https://github.com/user-attachments/assets/fe79b00a-bde1-4e43-bdfe-840e8c0c85db)
 
-```bash
-ng generate component component-name
-```
+![Ekran görüntüsü 2025-05-08 175259](https://github.com/user-attachments/assets/29d29141-da87-4d62-8cb6-798369cc53b0)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+![Ekran görüntüsü 2025-05-08 175310](https://github.com/user-attachments/assets/fbcde9ed-800c-40f8-9449-11435caea800)
 
-```bash
-ng generate --help
-```
+![Ekran görüntüsü 2025-05-08 175320](https://github.com/user-attachments/assets/a14dd8e6-d075-4f80-8373-5593454a89ec)
 
-## Building
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
