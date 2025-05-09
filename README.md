@@ -6,7 +6,7 @@ Uygulamanın ön yüzünde, Angular framework'ü ile geliştirilmiş kullanıcı
 
 Backend tarafı için : https://github.com/melisakkus/Angular_CompanyServer
 
-## 🚀 Proje UI Görselleri
+## 🚀 Proje Görselleri
 ![Ekran görüntüsü 2025-05-08 175222](https://github.com/user-attachments/assets/7ad7c943-0ecf-4e53-9590-f7ce2be0e053)
 
 ![Ekran görüntüsü 2025-05-08 175229](https://github.com/user-attachments/assets/5ff978bc-9c4a-492e-bedd-3cf2af7923a6)
